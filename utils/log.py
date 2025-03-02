@@ -2,21 +2,33 @@ import logging
 
 
 def setup_logger(name):
-    # Create the logger object.
+    """
+    Set up a logger with a specified name. The logger will log debug level
+    and higher messages to the concole.
+
+    Args:
+        name (str): The name of the logger.
+
+    Returns:
+        logging.Logger: The configured logger instance.
+    """
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
-    # Create stream handler for the logger and the level of logging.
-    stream_handler = logging.StreamHandler
+    # Configure logging to output to the console (stdout)
+    stream_handler = logging.StreamHandler()
     stream_handler.setLevel(logging.DEBUG)
 
-    # Specify a format for the log stream handler.
     log_formatter = logging.Formatter(
         "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     )
 
-    # Set the format for the log stream.
     stream_handler.setFormatter(log_formatter)
 
-    # Add the stream handler to the logger.
+    # Add the formatted stream handler to the logger.
     logger.addHandler(stream_handler)
+
+    return logger
+
+
+
